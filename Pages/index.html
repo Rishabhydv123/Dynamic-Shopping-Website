@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic-Shopping-Website </title>
+  <link rel="stylesheet" href="../Css/web.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <h2 class="logo">Dynamic-Shopping-Website</h2>
+
+    <div class="nav-right">
+      <input type="text" id="searchInput" placeholder="Search products..." />
+      
+      <select id="sortSelect">
+        <option value="">Sort By</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+      </select>
+
+      <a href="cart.html" class="cart-link">
+        Cart (<span id="cartCount">0</span>)
+      </a>
+    </div>
+  </nav>
+
+  <section class="products">
+    <div id="productContainer" class="product-grid"></div>
+  </section>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
