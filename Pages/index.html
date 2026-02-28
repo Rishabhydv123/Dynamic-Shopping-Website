@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dynamic-Shopping-Website </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dynamic-Shopping-Website</title>
   <link rel="stylesheet" href="../Css/web.css" />
 </head>
 <body>
@@ -13,7 +13,9 @@
 
     <div class="nav-right">
       <input type="text" id="searchInput" placeholder="Search products..." />
-      
+
+      <select id="categorySelect"></select>
+
       <select id="sortSelect">
         <option value="">Sort By</option>
         <option value="low">Price: Low to High</option>
@@ -30,6 +32,6 @@
     <div id="productContainer" class="product-grid"></div>
   </section>
 
-  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="../JavaScript/main.js"></script>
 </body>
 </html>
