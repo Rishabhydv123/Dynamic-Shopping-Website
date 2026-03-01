@@ -62,3 +62,7 @@ body {
   border: none;
   border-radius: 4px;
 }
+
+.product-card:hover {
+  background: #b67373;
+}
