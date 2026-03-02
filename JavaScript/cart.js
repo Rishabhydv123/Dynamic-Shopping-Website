@@ -1,7 +1,6 @@
 const cartContainer = document.getElementById("cartContainer");
 const cartTotal = document.getElementById("cartTotal");
 
-// Load Cart
 function loadCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -39,7 +38,6 @@ function loadCart() {
   cartTotal.textContent = total;
 }
 
-// Increase Quantity
 function increaseQty(id) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -54,7 +52,6 @@ function increaseQty(id) {
   loadCart();
 }
 
-// Decrease Quantity
 function decreaseQty(id) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -69,7 +66,6 @@ function decreaseQty(id) {
   loadCart();
 }
 
-// Remove Item
 function removeItem(id) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -79,7 +75,6 @@ function removeItem(id) {
   loadCart();
 }
 
-// Checkout Button
 function checkout() {
   alert("Proceeding to checkout...");
   window.location.href = "checkout.html";
