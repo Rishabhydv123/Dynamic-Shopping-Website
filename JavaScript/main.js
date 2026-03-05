@@ -3,9 +3,7 @@ const searchInput = document.getElementById("searchInput");
 const categorySelect = document.getElementById("categorySelect");
 const sortSelect = document.getElementById("sortSelect");
 
-
 /* ------------------ MANUAL CATEGORIES ------------------ */
-
 const categories = [
 "Fashion & Apparel",
 "Electronics",
@@ -21,7 +19,6 @@ const categories = [
 
 
 /* ------------------ PRODUCTS ------------------ */
-
 let allProducts = [
  // Men's Collection
   { id: 1, title: "Classic Slim Fit Shirt", price: 1999, category: "Fashion & Apparel", image: "../Assets/Mens/men1.jpg"},
