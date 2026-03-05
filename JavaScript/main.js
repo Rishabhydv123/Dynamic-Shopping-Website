@@ -3,8 +3,27 @@ const searchInput = document.getElementById("searchInput");
 const categorySelect = document.getElementById("categorySelect");
 const sortSelect = document.getElementById("sortSelect");
 
+
+/* ------------------ MANUAL CATEGORIES ------------------ */
+
+const categories = [
+"Fashion & Apparel",
+"Electronics",
+"Home & Kitchen",
+"Beauty & Personal Care",
+"Grocery & Daily Needs",
+"Toys, Games & Sports",
+"Books & Stationery",
+"Pet Supplies",
+"Automobile Accessories",
+"Digital Products"
+];
+
+
+/* ------------------ PRODUCTS ------------------ */
+
 let allProducts = [
-  // Men's Collection
+ // Men's Collection
   { id: 1, title: "Classic Slim Fit Shirt", price: 1999, category: "Fashion & Apparel", image: "../Assets/Mens/men1.jpg"},
   { id: 2, title: "Casual Denim Jacket", price: 1299, category: "Fashion & Apparel", image: "../Assets/Mens/men2.jpg"},
   { id: 3, title: "Premium Cotton T-Shirt", price: 1939, category: "Fashion & Apparel", image: "../Assets/Mens/men3.jpg" },
@@ -16,7 +35,7 @@ let allProducts = [
   { id: 9, title: "Athletic Track Suit", price: 2999, category: "Fashion & Apparel", image: "../Assets/Mens/men9.jpg" },
   { id: 10, title: "Winter Wool Sweater", price: 5999, category: "Fashion & Apparel", image: "../Assets/Mens/men10.jpg" },
 
-  // Women's Collection
+//   // Women's Collection
   { id: 11, title: "Elegant Floral Dress", price: 1999, category: "Fashion & Apparel", image: "../Assets/Womens/women1.jpg"},
   { id: 12, title: "Stylish Crop Top", price: 1299, category: "Fashion & Apparel", image: "../Assets/Womens/women2.jpg"},
   { id: 13, title: "Designer Party Gown", price: 1939, category: "Fashion & Apparel", image: "../Assets/Womens/women3.jpg" },
@@ -28,114 +47,150 @@ let allProducts = [
   { id: 19, title: "Winter Cardigan", price: 2999, category: "Fashion & Apparel", image: "../Assets/Womens/women9.jpg" },
   { id: 20, title: "Premium Silk Top", price: 5999, category: "Fashion & Apparel", image: "../Assets/Womens/women10.jpg" },
 
-  { id: 21, title: "Sports Shoes", price: 1999, category: "Footwear", image: "./assets/shoe.jpg" },
-  { id: 22, title: "Casual T-Shirt Basic", price: 799, category: "Clothing", image: "./assets/tshirt.jpg" },
-  { id: 23, title: "Smart Watch", price: 2499, category: "Electronics", image: "./assets/watch.jpg" }
+//   // Electronic Collection
 ];
 
-const uniqueCategories = [...new Set(allProducts.map(p => p.category))];
+function populateCategories(){
+categorySelect.innerHTML="";
+const allOption=document.createElement("option");
+allOption.value="";
+allOption.textContent="All Categories";
 
-function populateCategories() {
-  categorySelect.innerHTML = "";
+categorySelect.appendChild(allOption);
 
-  const allOption = document.createElement("option");
-  allOption.value = "";
-  allOption.textContent = "All Categories";
-  categorySelect.appendChild(allOption);
+categories.forEach(cat=>{
 
-  uniqueCategories.forEach(cat => {
-    const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
-    categorySelect.appendChild(option);
-  });
+const option=document.createElement("option");
+
+option.value=cat;
+option.textContent=cat;
+
+categorySelect.appendChild(option);
+
+});
+
 }
 
-function renderProducts(products) {
-  productContainer.innerHTML = "";
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+function renderProducts(products){
 
-  products.forEach(product => {
-    const cartItem = cart.find(item => item.id === product.id);
-    const quantity = cartItem ? cartItem.quantity : 0;
+productContainer.innerHTML="";
 
-    const card = document.createElement("div");
-    card.classList.add("product-card");
+const cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-    card.innerHTML = `
-      <img src="${product.image}" alt="${product.title}" />
-      <h4>${product.title}</h4>
-      <p>₹${product.price}</p>
-      ${
-        quantity > 0
-          ? `
-          <div class="quantity-controls">
-            <button onclick="changeQuantity(${product.id}, -1)">-</button>
-            <span>${quantity}</span>
-            <button onclick="changeQuantity(${product.id}, 1)">+</button>
-          </div>
-        `
-          : `<button onclick="changeQuantity(${product.id}, 1)">Add to Cart</button>`
-      }
-    `;
+products.forEach(product=>{
 
-    productContainer.appendChild(card);
-  });
+const cartItem=cart.find(item=>item.id===product.id);
+const quantity=cartItem?cartItem.quantity:0;
+
+const card=document.createElement("div");
+card.classList.add("product-card");
+
+card.innerHTML=`
+
+<img src="${product.image}" alt="${product.title}">
+<h4>${product.title}</h4>
+<p>₹${product.price}</p>
+
+${
+quantity>0
+?
+`
+<div class="quantity-controls">
+<button onclick="changeQuantity(${product.id},-1)">-</button>
+<span>${quantity}</span>
+<button onclick="changeQuantity(${product.id},1)">+</button>
+</div>
+`
+:
+`<button onclick="changeQuantity(${product.id},1)">Add to Cart</button>`
 }
 
-function applyFilters() {
-  let filtered = [...allProducts];
+`;
 
-  const searchValue = searchInput.value.toLowerCase();
-  if (searchValue) {
-    filtered = filtered.filter(p =>
-      p.title.toLowerCase().includes(searchValue)
-    );
-  }
+productContainer.appendChild(card);
 
-  const selectedCategory = categorySelect.value;
-  if (selectedCategory) {
-    filtered = filtered.filter(p => p.category === selectedCategory);
-  }
+});
 
-  if (sortSelect.value === "low") {
-    filtered.sort((a, b) => a.price - b.price);
-  } else if (sortSelect.value === "high") {
-    filtered.sort((a, b) => b.price - a.price);
-  }
-
-  renderProducts(filtered);
 }
 
-window.changeQuantity = function(id, change) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const product = allProducts.find(p => p.id === id);
-  const existing = cart.find(item => item.id === id);
+function applyFilters(){
 
-  if (existing) {
-    existing.quantity += change;
+let filtered=[...allProducts];
 
-    if (existing.quantity <= 0) {
-      cart = cart.filter(item => item.id !== id);
-    }
-  } else if (change > 0) {
-    cart.push({ ...product, quantity: 1 });
-  }
+const searchValue=searchInput.value.toLowerCase();
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
-  applyFilters();
+if(searchValue){
+
+filtered=filtered.filter(p=>
+p.title.toLowerCase().includes(searchValue)
+);
+
+}
+
+const selectedCategory=categorySelect.value;
+
+if(selectedCategory){
+
+filtered=filtered.filter(p=>
+p.category===selectedCategory
+);
+
+}
+
+if(sortSelect.value==="low"){
+filtered.sort((a,b)=>a.price-b.price);
+}
+
+if(sortSelect.value==="high"){
+filtered.sort((a,b)=>b.price-a.price);
+}
+
+renderProducts(filtered);
+
+}
+
+
+
+window.changeQuantity=function(id,change){
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+const product=allProducts.find(p=>p.id===id);
+const existing=cart.find(item=>item.id===id);
+
+if(existing){
+
+existing.quantity+=change;
+
+if(existing.quantity<=0){
+cart=cart.filter(item=>item.id!==id);
+}
+
+}
+else if(change>0){
+
+cart.push({...product,quantity:1});
+
+}
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+updateCartCount();
+applyFilters();
+
 };
 
-function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.getElementById("cartCount").textContent = totalQuantity;
+
+function updateCartCount(){
+const cart=JSON.parse(localStorage.getItem("cart"))||[];
+const totalQuantity=cart.reduce((sum,item)=>sum+item.quantity,0);
+document.getElementById("cartCount").textContent=totalQuantity;
+
 }
 
-searchInput.addEventListener("input", applyFilters);
-categorySelect.addEventListener("change", applyFilters);
-sortSelect.addEventListener("change", applyFilters);
+
+
+searchInput.addEventListener("input",applyFilters);
+categorySelect.addEventListener("change",applyFilters);
+sortSelect.addEventListener("change",applyFilters);
 
 populateCategories();
 renderProducts(allProducts);
