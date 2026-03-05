@@ -47,7 +47,30 @@ let allProducts = [
   { id: 19, title: "Winter Cardigan", price: 2999, category: "Fashion & Apparel", image: "../Assets/Womens/women9.jpg" },
   { id: 20, title: "Premium Silk Top", price: 5999, category: "Fashion & Apparel", image: "../Assets/Womens/women10.jpg" },
 
-//   // Electronic Collection
+// Electronic Collection
+{ id: 21, title: "JBL Bluetooth Speaker", price: 2999, category: "Electronics", image: "../Assets/Electronics/jbl.jpg"},
+{ id: 22, title: "Fast Charging Adapter", price: 899, category: "Electronics", image: "../Assets/Electronics/charging.jpg"},
+{ id: 23, title: "Wireless Headphones", price: 2499, category: "Electronics", image: "../Assets/Electronics/headphone.jpeg"},
+{ id: 24, title: "iPhone 17 Pro Max", price: 129999, category: "Electronics", image: "../Assets/Electronics/iphone-17-pro-17-pro-max-hero.png"},
+{ id: 25, title: "Apple MacBook", price: 149999, category: "Electronics", image: "../Assets/Electronics/Mac.webp"},
+{ id: 26, title: "Portable Power Bank", price: 1599, category: "Electronics", image: "../Assets/Electronics/powerbank.png"},
+{ id: 27, title: "Samsung Galaxy S26 Ultra", price: 119999, category: "Electronics", image: "../Assets/Electronics/SAMSUNG_GALAXY_S26_ULTRA_5_G_9232e2ad7e.png"},
+{ id: 28, title: "Android Tablet", price: 19999, category: "Electronics", image: "../Assets/Electronics/Tablet.webp"},
+{ id: 29, title: "Asus VivoBook 15 Laptop", price: 55999, category: "Electronics", image: "../Assets/Electronics/vivobook15.jpeg"},
+{ id: 30, title: "Smart Watch", price: 3999, category: "Electronics", image: "../Assets/Electronics/waatch.png"},
+
+
+// Home & Kitchen
+{ id: 31, title: "Modern Sofa Set", price: 25999, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home2.png"},
+{ id: 32, title: "Wooden Coffee Table", price: 6999, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home3.png"},
+{ id: 33, title: "Kitchen Mixer Grinder", price: 3499, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen1.png"},
+{ id: 34, title: "Non-Stick Cookware Set", price: 2899, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen2.png"},
+{ id: 35, title: "Luxury Bed Lamp", price: 1999, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home1.png"},
+{ id: 36, title: "Wall Decoration Frame", price: 1499, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home4.png"},
+{ id: 37, title: "Steel Kitchen Storage Set", price: 1799, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen3.png"},
+{ id: 38, title: "Electric Rice Cooker", price: 2499, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen4.png"},
+{ id: 39, title: "Designer Chair", price: 4599, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home5.png"},
+{ id: 40, title: "Kitchen Knife Set", price: 1299, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen5.png"},
 ];
 
 function populateCategories(){
@@ -106,17 +129,12 @@ quantity>0
 }
 
 `;
-
 productContainer.appendChild(card);
-
 });
-
 }
 
 function applyFilters(){
-
 let filtered=[...allProducts];
-
 const searchValue=searchInput.value.toLowerCase();
 
 if(searchValue){
@@ -124,23 +142,17 @@ if(searchValue){
 filtered=filtered.filter(p=>
 p.title.toLowerCase().includes(searchValue)
 );
-
 }
 
 const selectedCategory=categorySelect.value;
-
 if(selectedCategory){
-
 filtered=filtered.filter(p=>
 p.category===selectedCategory
 );
-
 }
-
 if(sortSelect.value==="low"){
 filtered.sort((a,b)=>a.price-b.price);
 }
-
 if(sortSelect.value==="high"){
 filtered.sort((a,b)=>b.price-a.price);
 }
@@ -149,44 +161,33 @@ renderProducts(filtered);
 
 }
 
-
-
 window.changeQuantity=function(id,change){
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 const product=allProducts.find(p=>p.id===id);
 const existing=cart.find(item=>item.id===id);
 
 if(existing){
-
 existing.quantity+=change;
-
 if(existing.quantity<=0){
 cart=cart.filter(item=>item.id!==id);
 }
 
 }
 else if(change>0){
-
 cart.push({...product,quantity:1});
-
 }
 
 localStorage.setItem("cart",JSON.stringify(cart));
 
 updateCartCount();
 applyFilters();
-
 };
-
 
 function updateCartCount(){
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
 const totalQuantity=cart.reduce((sum,item)=>sum+item.quantity,0);
 document.getElementById("cartCount").textContent=totalQuantity;
-
 }
-
-
 
 searchInput.addEventListener("input",applyFilters);
 categorySelect.addEventListener("change",applyFilters);
