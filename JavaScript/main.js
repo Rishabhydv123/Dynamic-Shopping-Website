@@ -68,6 +68,14 @@ let allProducts = [
 { id: 38, title: "Electric Rice Cooker", price: 2499, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen4.png"},
 { id: 39, title: "Designer Chair", price: 4599, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home5.png"},
 { id: 40, title: "Kitchen Knife Set", price: 1299, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen5.png"},
+
+// Beauty & Personal Care
+// Grocery & Daily Needs,
+// Toys, Games & Sports
+// Books & Stationery
+// Pet Supplies
+// Automobile Accessories
+// Digital Products
 ];
 
 function populateCategories(){
