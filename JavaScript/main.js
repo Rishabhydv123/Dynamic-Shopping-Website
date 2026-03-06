@@ -14,7 +14,6 @@ const categories = [
 "Books & Stationery",
 "Pet Supplies",
 "Automobile Accessories",
-"Digital Products"
 ];
 
 
@@ -79,14 +78,48 @@ let allProducts = [
 { id: 48, title: "Electric Trimmer", price: 1299, category: "Beauty & Personal Care", image: "../Assets/Beauty & Personal Care/personal5 (4).jpg"},
 { id: 49, title: "Skin Care Combo Pack", price: 1599, category: "Beauty & Personal Care", image: "../Assets/Beauty & Personal Care/beauty5.png"},
 { id: 50, title: "Nail Care Kit", price: 499, category: "Beauty & Personal Care", image: "../Assets/Beauty & Personal Care/personal5 (5).jpg"},
+
 // Grocery & Daily Needs
 
+
 // Toys, Games & Sports
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Game1.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Game2.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Game3.jpeg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Game4.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Game5.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Toy1.png"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Toy2.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Toy3.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Toy4.png"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Toys, Games & Sports", image: "../Assets/Toys, Games & Sports/Toy5.jpg"},
+
 // Books & Stationery
 
 // Pet Supplies
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet1.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet2.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet3.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet4.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet5.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet6.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet7.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet8.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet9.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Pet Supplies", image: "../Assets/Pet Supplies/pet10.jpg"},
+
 // Automobile Accessories
-// Digital Products
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto1.avif"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto2.png"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto3.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto4.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto5.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto6.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto7.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto8.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto9.jpg"},
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto10.jpg"},
+
 ];
 
 function populateCategories(){
@@ -96,14 +129,10 @@ allOption.value="";
 allOption.textContent="All Categories";
 
 categorySelect.appendChild(allOption);
-
 categories.forEach(cat=>{
-
 const option=document.createElement("option");
-
 option.value=cat;
 option.textContent=cat;
-
 categorySelect.appendChild(option);
 
 });
@@ -111,21 +140,15 @@ categorySelect.appendChild(option);
 }
 
 function renderProducts(products){
-
 productContainer.innerHTML="";
-
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
-
 products.forEach(product=>{
-
 const cartItem=cart.find(item=>item.id===product.id);
 const quantity=cartItem?cartItem.quantity:0;
-
 const card=document.createElement("div");
 card.classList.add("product-card");
 
 card.innerHTML=`
-
 <img src="${product.image}" alt="${product.title}">
 <h4>${product.title}</h4>
 <p>₹${product.price}</p>
