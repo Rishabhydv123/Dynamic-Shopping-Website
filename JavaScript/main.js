@@ -80,9 +80,30 @@ let allProducts = [
 { id: 49, title: "Skin Care Combo Pack", price: 1599, category: "Beauty & Personal Care", image: "../Assets/Beauty & Personal Care/beauty5.png"},
 { id: 50, title: "Nail Care Kit", price: 499, category: "Beauty & Personal Care", image: "../Assets/Beauty & Personal Care/personal5 (5).jpg"},
 // Grocery & Daily Needs
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/Grocery1.png"},
+{ id: 42, title: "Vitamin C Face Serum", price: 599, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/Grocery2.png"},
+{ id: 43, title: "Hair Dryer", price: 1499, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/Grocery3.png"},
+{ id: 44, title: "Makeup Kit Set", price: 1999, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/Grocery4.png"},
+{ id: 45, title: "Body Lotion", price: 349, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/Grocery5.png"},
+{ id: 46, title: "Perfume Spray", price: 899, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/DailyNeeds1.png"},
+{ id: 47, title: "Hair Straightener", price: 1799, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/DailyNeeds2.png"},
+{ id: 48, title: "Electric Trimmer", price: 1299, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/DailyNeeds3.png"},
+{ id: 49, title: "Skin Care Combo Pack", price: 1599, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/DailyNeeds4.png"},
+{ id: 50, title: "Nail Care Kit", price: 499, category: "Grocery & Daily Needs", image: "../Assets/Grocery & Daily Needs/DailyNeeds5.png"},
 
 // Toys, Games & Sports
 // Books & Stationery
+{ id: 41, title: "Herbal Face Wash", price: 299, category: "Books & Stationery", image: "../Assets/Books & Stationery/B1.png"},
+{ id: 42, title: "Vitamin C Face Serum", price: 599, category: "Books & Stationery", image: "../Assets/Books & Stationery/B2.png"},
+{ id: 43, title: "Hair Dryer", price: 1499, category: "Books & Stationery", image: "../Assets/Books & Stationery/B3.png"},
+{ id: 44, title: "Makeup Kit Set", price: 1999, category: "Books & Stationery", image: "../Assets/Books & Stationery/B4.png"},
+{ id: 45, title: "Body Lotion", price: 349, category: "Books & Stationery", image: "../Assets/Books & Stationery/B5.png"},
+{ id: 46, title: "Perfume Spray", price: 899, category: "Books & Stationery", image: "../Assets/Books & Stationery/B6.png"},
+{ id: 47, title: "Hair Straightener", price: 1799, category: "Books & Stationery", image: "../Assets/Books & Stationery/B7.png"},
+{ id: 48, title: "Electric Trimmer", price: 1299, category: "Books & Stationery", image: "../Assets/Books & Stationery/B8.png"},
+{ id: 49, title: "Skin Care Combo Pack", price: 1599, category: "Books & Stationery", image: "../Assets/Books & Stationery/B9.png"},
+{ id: 50, title: "Nail Care Kit", price: 499, category: "Books & Stationery", image: "../Assets/Books & Stationery/B10.png"},
+
 
 // Pet Supplies
 // Automobile Accessories
