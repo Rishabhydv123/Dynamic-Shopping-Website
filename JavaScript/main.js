@@ -70,6 +70,17 @@ let allProducts = [
 { id: 40, title: "Kitchen Knife Set", price: 1299, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen5.png"},
 
 // Beauty & Personal Care
+{ id: 31, title: "Modern Sofa Set", price: 25999, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home2.png"},
+{ id: 32, title: "Wooden Coffee Table", price: 6999, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home3.png"},
+{ id: 33, title: "Kitchen Mixer Grinder", price: 3499, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen1.png"},
+{ id: 34, title: "Non-Stick Cookware Set", price: 2899, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen2.png"},
+{ id: 35, title: "Luxury Bed Lamp", price: 1999, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home1.png"},
+{ id: 36, title: "Wall Decoration Frame", price: 1499, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home4.png"},
+{ id: 37, title: "Steel Kitchen Storage Set", price: 1799, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen3.png"},
+{ id: 38, title: "Electric Rice Cooker", price: 2499, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen4.png"},
+{ id: 39, title: "Designer Chair", price: 4599, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/home5.png"},
+{ id: 40, title: "Kitchen Knife Set", price: 1299, category: "Home & Kitchen", image: "../Assets/Home & Kitchen/kitchen5.png"},
+
 // Grocery & Daily Needs,
 // Toys, Games & Sports
 // Books & Stationery
