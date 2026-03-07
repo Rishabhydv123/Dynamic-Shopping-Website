@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+
+<link rel="stylesheet" href="../Css/web.css">
 </head>
+
 <body>
-    
+<nav class="navbar">
+<h2 class="logo">MyStore</h2>
+<a href="cart.html" class="cart-link">Back to Cart</a>
+</nav>
+
+<section class="checkout-container">
+
+<div class="shipping-form">
+<h2>Shipping Details</h2>
+<form id="checkoutForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email Address" required>
+<input type="text" id="address" placeholder="Address" required>
+<input type="text" id="city" placeholder="City" required>
+<input type="text" id="pincode" placeholder="Pincode" required>
+
+<select id="payment" required>
+<option value="">Select Payment Method</option>
+<option value="cod">Cash on Delivery</option>
+<option value="card">Credit / Debit Card</option>
+<option value="upi">UPI</option>
+</select>
+
+<button type="submit">Place Order</button>
+</form>
+</div>
+
+<div class="order-summary">
+<h2>Order Summary</h2>
+<div id="summaryItems"></div>
+<h3>Total: ₹<span id="orderTotal">0</span></h3>
+</div>
+</section>
+<script src="../JavaScript/checkout.js"></script>
+
 </body>
 </html>
