@@ -12,7 +12,9 @@ body {
   background-color: #9f4444;
   color: white;
 }
-
+#searchInput{
+  margin-top: 13px;
+}
 .nav-right {
   display: flex;
   gap: 15px;
@@ -134,6 +136,19 @@ cursor:pointer;
 margin:0 3px;
 }
 
+.cart-item>button{
+  width: 10%;
+}
+
+.M>.minus{
+  margin-top: -5px;
+}
+.M>.plus{
+  margin-top: 20px;
+}
+.cart-item>.bn{
+  margin: 15px;
+}
 .cart-item button:hover{
 background:#e85d00;
 }
