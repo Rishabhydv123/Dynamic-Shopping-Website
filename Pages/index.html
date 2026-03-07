@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dynamic Shopping Website</title>
+
 <link rel="stylesheet" href="../Css/web.css">
+
 </head>
 
 <body>
-
 <nav class="navbar">
 <h2 class="logo">Dynamic Shopping Website</h2>
 <div class="nav-right">
 <input type="text" id="searchInput" placeholder="Search products...">
-
 <select id="categorySelect"></select>
 
 <select id="sortSelect">
@@ -23,19 +22,16 @@
 <option value="high">Price: High to Low</option>
 </select>
 
-<a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a>
+<a href="cart.html">
+Cart (<span id="cartCount">0</span>)
+</a>
 </div>
 </nav>
-
 <section class="products">
-<div id="productContainer" class="product-grid"></div>
+<div id="productContainer"></div>
 </section>
 
-<script type="module" src="../JavaScript/main.js"></script>
-<<<<<<< HEAD
-=======
+<script src="../JavaScript/main.js"></script>
 
->>>>>>> db90bba0f013d51aed08a7eaf86c67263555ee6a
-  
 </body>
 </html>

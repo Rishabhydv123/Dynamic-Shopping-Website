@@ -19,7 +19,6 @@ discountAmount.textContent = 0;
 finalTotal.textContent = 0;
 
 return;
-
 }
 
 let subtotal = 0;
@@ -38,10 +37,8 @@ div.innerHTML = `
 <span>${item.quantity}</span>
 <button onclick="increaseQty(${item.id})">+</button>
 </div>
-
 <button onclick="removeItem(${item.id})">Remove</button>
 `;
-
 cartContainer.appendChild(div);
 
 });

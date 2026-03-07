@@ -143,12 +143,14 @@ let allProducts = [
 
 ];
 
+
+localStorage.setItem("products", JSON.stringify(allProducts));
+
 function populateCategories(){
 categorySelect.innerHTML="";
 const allOption=document.createElement("option");
 allOption.value="";
 allOption.textContent="All Categories";
-
 categorySelect.appendChild(allOption);
 categories.forEach(cat=>{
 const option=document.createElement("option");
@@ -164,16 +166,20 @@ function renderProducts(products){
 productContainer.innerHTML="";
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
 products.forEach(product=>{
+
 const cartItem=cart.find(item=>item.id===product.id);
 const quantity=cartItem?cartItem.quantity:0;
+
 const card=document.createElement("div");
 card.classList.add("product-card");
 
 card.innerHTML=`
+
+<a href="product.html?id=${product.id}">
 <img src="${product.image}" alt="${product.title}">
+</a>
 <h4>${product.title}</h4>
 <p>₹${product.price}</p>
-
 ${
 quantity>0
 ?
@@ -196,12 +202,11 @@ productContainer.appendChild(card);
 function applyFilters(){
 let filtered=[...allProducts];
 const searchValue=searchInput.value.toLowerCase();
-
 if(searchValue){
-
 filtered=filtered.filter(p=>
 p.title.toLowerCase().includes(searchValue)
 );
+
 }
 
 const selectedCategory=categorySelect.value;
@@ -209,10 +214,13 @@ if(selectedCategory){
 filtered=filtered.filter(p=>
 p.category===selectedCategory
 );
+
 }
+
 if(sortSelect.value==="low"){
 filtered.sort((a,b)=>a.price-b.price);
 }
+
 if(sortSelect.value==="high"){
 filtered.sort((a,b)=>b.price-a.price);
 }
@@ -225,9 +233,9 @@ window.changeQuantity=function(id,change){
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 const product=allProducts.find(p=>p.id===id);
 const existing=cart.find(item=>item.id===id);
-
 if(existing){
 existing.quantity+=change;
+
 if(existing.quantity<=0){
 cart=cart.filter(item=>item.id!==id);
 }
@@ -241,12 +249,14 @@ localStorage.setItem("cart",JSON.stringify(cart));
 
 updateCartCount();
 applyFilters();
+
 };
 
 function updateCartCount(){
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
 const totalQuantity=cart.reduce((sum,item)=>sum+item.quantity,0);
 document.getElementById("cartCount").textContent=totalQuantity;
+
 }
 
 searchInput.addEventListener("input",applyFilters);
