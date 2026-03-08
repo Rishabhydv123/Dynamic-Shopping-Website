@@ -266,3 +266,5 @@ sortSelect.addEventListener("change",applyFilters);
 populateCategories();
 renderProducts(allProducts);
 updateCartCount();
+
+localStorage.setItem("products", JSON.stringify(allProducts));
