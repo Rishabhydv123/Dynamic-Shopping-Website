@@ -191,6 +191,10 @@ left:100%;
     gap: 30px;
 }
 
+.cart-link {
+    color: #ccc;
+}
+
 .cart-section h2 {
     width: 100%;
     text-align: center;
