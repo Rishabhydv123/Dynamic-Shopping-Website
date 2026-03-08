@@ -3,9 +3,7 @@ const relatedContainer = document.getElementById("relatedProducts");
 
 const params = new URLSearchParams(window.location.search);
 const productId = parseInt(params.get("id"));
-
 const products = JSON.parse(localStorage.getItem("products")) || [];
-
 const product = products.find(p => p.id === productId);
 
 function getQuantity(id){

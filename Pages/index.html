@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Dynamic Shopping Website</title>
+
+<link rel="icon" type="image/png" href="../favicon.png">
 <link rel="stylesheet" href="../Css/web.css">
 
 </head>
 
 <body>
+
 <nav class="navbar">
 <h2 class="logo">Dynamic Shopping Website</h2>
 <div class="nav-right">
@@ -22,12 +24,18 @@
 </select>
 
 <a href="cart.html">
-Cart (<span id="cartCount">0</span>)</a>
+Cart (<span id="cartCount">0</span>)
+</a>
+
+<a href="orders.html">My Orders</a>
 </div>
 </nav>
+
 <section class="products">
-<div id="productContainer"></div>
+<div id="productContainer" class="product-grid"></div>
 </section>
+
+<button id="scrollTopBtn">↑</button>
 
 <script src="../JavaScript/main.js"></script>
 

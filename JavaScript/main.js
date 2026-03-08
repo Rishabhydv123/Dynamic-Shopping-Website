@@ -146,16 +146,22 @@ let allProducts = [
 
 localStorage.setItem("products", JSON.stringify(allProducts));
 
+
 function populateCategories(){
 categorySelect.innerHTML="";
 const allOption=document.createElement("option");
 allOption.value="";
 allOption.textContent="All Categories";
+
 categorySelect.appendChild(allOption);
+
 categories.forEach(cat=>{
+
 const option=document.createElement("option");
+
 option.value=cat;
 option.textContent=cat;
+
 categorySelect.appendChild(option);
 
 });
@@ -163,6 +169,7 @@ categorySelect.appendChild(option);
 }
 
 function renderProducts(products){
+if(!productContainer) return;
 productContainer.innerHTML="";
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
 products.forEach(product=>{
@@ -176,10 +183,11 @@ card.classList.add("product-card");
 card.innerHTML=`
 
 <a href="product.html?id=${product.id}">
-<img src="${product.image}" alt="${product.title}">
+<img src="${product.image}" alt="${product.title}" loading="lazy">
 </a>
 <h4>${product.title}</h4>
 <p>₹${product.price}</p>
+
 ${
 quantity>0
 ?
@@ -197,11 +205,12 @@ quantity>0
 `;
 productContainer.appendChild(card);
 });
+
 }
 
 function applyFilters(){
 let filtered=[...allProducts];
-const searchValue=searchInput.value.toLowerCase();
+const searchValue=searchInput?.value.toLowerCase();
 if(searchValue){
 filtered=filtered.filter(p=>
 p.title.toLowerCase().includes(searchValue)
@@ -209,7 +218,7 @@ p.title.toLowerCase().includes(searchValue)
 
 }
 
-const selectedCategory=categorySelect.value;
+const selectedCategory=categorySelect?.value;
 if(selectedCategory){
 filtered=filtered.filter(p=>
 p.category===selectedCategory
@@ -217,11 +226,11 @@ p.category===selectedCategory
 
 }
 
-if(sortSelect.value==="low"){
+if(sortSelect?.value==="low"){
 filtered.sort((a,b)=>a.price-b.price);
 }
 
-if(sortSelect.value==="high"){
+if(sortSelect?.value==="high"){
 filtered.sort((a,b)=>b.price-a.price);
 }
 
@@ -233,9 +242,9 @@ window.changeQuantity=function(id,change){
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 const product=allProducts.find(p=>p.id===id);
 const existing=cart.find(item=>item.id===id);
+
 if(existing){
 existing.quantity+=change;
-
 if(existing.quantity<=0){
 cart=cart.filter(item=>item.id!==id);
 }
@@ -243,6 +252,7 @@ cart=cart.filter(item=>item.id!==id);
 }
 else if(change>0){
 cart.push({...product,quantity:1});
+
 }
 
 localStorage.setItem("cart",JSON.stringify(cart));
@@ -255,16 +265,38 @@ applyFilters();
 function updateCartCount(){
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
 const totalQuantity=cart.reduce((sum,item)=>sum+item.quantity,0);
-document.getElementById("cartCount").textContent=totalQuantity;
+const cartCount=document.getElementById("cartCount");
+if(cartCount){
+cartCount.textContent=totalQuantity;
+}
 
 }
 
-searchInput.addEventListener("input",applyFilters);
-categorySelect.addEventListener("change",applyFilters);
-sortSelect.addEventListener("change",applyFilters);
+searchInput?.addEventListener("input",applyFilters);
+categorySelect?.addEventListener("change",applyFilters);
+sortSelect?.addEventListener("change",applyFilters);
 
 populateCategories();
 renderProducts(allProducts);
 updateCartCount();
 
-localStorage.setItem("products", JSON.stringify(allProducts));
+const scrollTopBtn=document.getElementById("scrollTopBtn");
+if(scrollTopBtn){
+window.addEventListener("scroll",()=>{
+if(window.scrollY>200){
+scrollTopBtn.style.display="block";
+}else{
+scrollTopBtn.style.display="none";
+}
+
+});
+
+scrollTopBtn.addEventListener("click",()=>{
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+});
+
+}
