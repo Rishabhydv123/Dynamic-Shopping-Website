@@ -18,7 +18,7 @@ const categories = [
 
 
 /* ------------------ PRODUCTS ------------------ */
-let allProducts = [
+let allProducts = JSON.parse(localStorage.getItem("products")) ||  [
  // Men's Collection
   { id: 1, title: "Classic Slim Fit Shirt", price: 1999, category: "Fashion & Apparel", image: "../Assets/Mens/men1.jpg"},
   { id: 2, title: "Casual Denim Jacket", price: 1299, category: "Fashion & Apparel", image: "../Assets/Mens/men2.jpg"},
@@ -143,50 +143,55 @@ let allProducts = [
 
 ];
 
-
 localStorage.setItem("products", JSON.stringify(allProducts));
-
 
 function populateCategories(){
 categorySelect.innerHTML="";
-const allOption=document.createElement("option");
-allOption.value="";
-allOption.textContent="All Categories";
-
-categorySelect.appendChild(allOption);
-
-categories.forEach(cat=>{
-
 const option=document.createElement("option");
-
-option.value=cat;
-option.textContent=cat;
+option.value="";
+option.textContent="All Categories";
 
 categorySelect.appendChild(option);
 
+categories.forEach(cat=>{
+const opt=document.createElement("option");
+opt.value=cat;
+opt.textContent=cat;
+categorySelect.appendChild(opt);
 });
-
 }
 
 function renderProducts(products){
-if(!productContainer) return;
 productContainer.innerHTML="";
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
+const wishlist=JSON.parse(localStorage.getItem("wishlist"))||[];
 products.forEach(product=>{
-
 const cartItem=cart.find(item=>item.id===product.id);
 const quantity=cartItem?cartItem.quantity:0;
 
+const isWishlisted=wishlist.includes(product.id);
 const card=document.createElement("div");
 card.classList.add("product-card");
-
 card.innerHTML=`
 
 <a href="product.html?id=${product.id}">
-<img src="${product.image}" alt="${product.title}" loading="lazy">
+<img src="${product.image}" alt="${product.title}">
 </a>
 <h4>${product.title}</h4>
+<div class="price-wishlist">
 <p>₹${product.price}</p>
+<span class="wishlist-icon" onclick="toggleWishlist(${product.id})">
+${isWishlisted ? "❤️" : "🤍"}
+</span>
+</div>
+
+<div class="rating" id="rating-${product.id}">
+<span onclick="rateProduct(${product.id},1)">★</span>
+<span onclick="rateProduct(${product.id},2)">★</span>
+<span onclick="rateProduct(${product.id},3)">★</span>
+<span onclick="rateProduct(${product.id},4)">★</span>
+<span onclick="rateProduct(${product.id},5)">★</span>
+</div>
 
 ${
 quantity>0
@@ -201,102 +206,102 @@ quantity>0
 :
 `<button onclick="changeQuantity(${product.id},1)">Add to Cart</button>`
 }
-
 `;
 productContainer.appendChild(card);
 });
-
+showRatings();
 }
 
 function applyFilters(){
 let filtered=[...allProducts];
-const searchValue=searchInput?.value.toLowerCase();
+const searchValue=searchInput.value.toLowerCase();
 if(searchValue){
 filtered=filtered.filter(p=>
 p.title.toLowerCase().includes(searchValue)
 );
-
 }
 
-const selectedCategory=categorySelect?.value;
+const selectedCategory=categorySelect.value;
 if(selectedCategory){
 filtered=filtered.filter(p=>
 p.category===selectedCategory
 );
-
 }
 
-if(sortSelect?.value==="low"){
+if(sortSelect.value==="low"){
 filtered.sort((a,b)=>a.price-b.price);
 }
 
-if(sortSelect?.value==="high"){
+if(sortSelect.value==="high"){
 filtered.sort((a,b)=>b.price-a.price);
 }
-
 renderProducts(filtered);
-
 }
 
 window.changeQuantity=function(id,change){
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 const product=allProducts.find(p=>p.id===id);
 const existing=cart.find(item=>item.id===id);
-
 if(existing){
 existing.quantity+=change;
 if(existing.quantity<=0){
 cart=cart.filter(item=>item.id!==id);
-}
+}}
 
-}
 else if(change>0){
 cart.push({...product,quantity:1});
-
 }
 
 localStorage.setItem("cart",JSON.stringify(cart));
-
-updateCartCount();
 applyFilters();
-
+updateCartCount();
 };
 
 function updateCartCount(){
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
-const totalQuantity=cart.reduce((sum,item)=>sum+item.quantity,0);
-const cartCount=document.getElementById("cartCount");
-if(cartCount){
-cartCount.textContent=totalQuantity;
+const total=cart.reduce((sum,item)=>sum+item.quantity,0);
+document.getElementById("cartCount").textContent=total;
 }
 
+window.toggleWishlist=function(id){
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+if(wishlist.includes(id)){
+wishlist = wishlist.filter(item => item !== id);
 }
 
-searchInput?.addEventListener("input",applyFilters);
-categorySelect?.addEventListener("change",applyFilters);
-sortSelect?.addEventListener("change",applyFilters);
+else{
+wishlist.push(id);
+}
+localStorage.setItem("wishlist", JSON.stringify(wishlist));
+applyFilters();
+};
+
+window.rateProduct=function(id,rating){
+let ratings=JSON.parse(localStorage.getItem("ratings"))||{};
+ratings[id]=rating;
+localStorage.setItem("ratings",JSON.stringify(ratings));
+showRatings();
+};
+
+function showRatings(){
+let ratings=JSON.parse(localStorage.getItem("ratings"))||{};
+Object.keys(ratings).forEach(id=>{
+const ratingDiv=document.getElementById(`rating-${id}`);
+if(!ratingDiv) return;
+const stars=ratingDiv.querySelectorAll("span");
+stars.forEach((star,index)=>{
+if(index<ratings[id]){
+star.style.color="gold";
+}else{
+star.style.color="gray";
+}
+});
+});}
+
+searchInput.addEventListener("input",applyFilters);
+categorySelect.addEventListener("change",applyFilters);
+sortSelect.addEventListener("change",applyFilters);
 
 populateCategories();
 renderProducts(allProducts);
 updateCartCount();
-
-const scrollTopBtn=document.getElementById("scrollTopBtn");
-if(scrollTopBtn){
-window.addEventListener("scroll",()=>{
-if(window.scrollY>200){
-scrollTopBtn.style.display="block";
-}else{
-scrollTopBtn.style.display="none";
-}
-
-});
-
-scrollTopBtn.addEventListener("click",()=>{
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-});
-
-}
