@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Page</title>
+<title>Login</title>
+<link rel="stylesheet" href="../Css/web.css">
 </head>
+
 <body>
-   
-    <button id="btn" onclick="window.location='/DYNAMIC-SHOPPING-WEBSITE/Pages/index.html'">Back</button>
-    <div class="mainContainer">
-        <div class="loginPage">
-            <h1>Login</h1>
-            <label>Username</label>
-            <input type="text" placeholder="Enter your Name...." name="loginUsername" id="loginUsername" autocomplete="off">
-            <label>Password</label>
-            <input type="password" placeholder="Enter your password" name="Loginpassword" id="Loginpassword"autocomplete="off">
-            <button class="button" type="button" onclick="Login()">Submit</button>
-            <p id="loginError" style="color:red;"></p>
-        </div>
-    </div>
-   
+<a href="index.html" class="cart">Back to Shop</a>
+
+<div class="auth-container">
+  <div class="auth-box">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p>
+      Don't have an account? 
+      <a href="signup.html">Signup</a>
+    </p>
+  </div>
+</div>
+
+<script src="../JavaScript/login.js"></script>
 </body>
-<script src="../JavaScript/Login.js"></script>
-
-
-
 </html>

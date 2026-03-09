@@ -1,23 +1,30 @@
-const storeData = JSON.parse(localStorage.getItem("userData")) || [];
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("loginForm");
+    if (!form) return; 
 
-function Login() {
-  const userName = document.getElementById("loginUsername").value.trim();
-  const password = document.getElementById("Loginpassword").value.trim();
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-  const findUser = storeData.find(el => el.user === userName);
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
 
-  if (!findUser) {
-    alert("User not found ❌");
-    return;
-  }
+        if (!emailInput || !passwordInput) {
+            alert("Email or Password field is missing!");
+            return;
+        }
 
-  if (findUser.pass !== password) {
-    alert("Password doesn't match ❌");
-    return;
-  }
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
 
-  sessionStorage.setItem("token", "loggedin");
-  sessionStorage.setItem("loggedUser", userName);
-  // alert("Login Successful ✅");
-  window.location.href = "/local storage/page/home.html";
-}
+        if (!email || !password) {
+            alert("Please enter both email and password.");
+            return;
+        }
+
+        const user = { email, password };
+        localStorage.setItem("user", JSON.stringify(user));
+
+        alert("Login Successful");
+        window.location.href = "index.html"; 
+    });
+});
