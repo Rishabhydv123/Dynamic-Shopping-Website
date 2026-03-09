@@ -1,30 +1,25 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("loginForm");
-    if (!form) return; 
+const form = document.getElementById("loginForm");
 
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
+form.addEventListener("submit", function(e){
 
-        const emailInput = document.getElementById("email");
-        const passwordInput = document.getElementById("password");
+e.preventDefault();
 
-        if (!emailInput || !passwordInput) {
-            alert("Email or Password field is missing!");
-            return;
-        }
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+const user = JSON.parse(localStorage.getItem("user"));
 
-        if (!email || !password) {
-            alert("Please enter both email and password.");
-            return;
-        }
+if(user && user.email === email && user.password === password){
 
-        const user = { email, password };
-        localStorage.setItem("user", JSON.stringify(user));
+localStorage.setItem("isLoggedIn", true);
+alert("Login Successful");
+window.location.href = "index.html";
 
-        alert("Login Successful");
-        window.location.href = "index.html"; 
-    });
+}else{
+
+alert("Invalid Email or Password");
+
+}
+
 });
+

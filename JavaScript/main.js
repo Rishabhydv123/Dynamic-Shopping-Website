@@ -1,3 +1,10 @@
+// LOGOUT 
+window.logout = function () {
+localStorage.removeItem("isLoggedIn");
+alert("Logout Successful");
+window.location.href = "login.html";
+};
+
 const productContainer = document.getElementById("productContainer");
 const searchInput = document.getElementById("searchInput");
 const categorySelect = document.getElementById("categorySelect");
