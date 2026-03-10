@@ -1,16 +1,21 @@
-// LOGOUT 
+//  LOGOUT 
 window.logout = function () {
 localStorage.removeItem("isLoggedIn");
 alert("Logout Successful");
 window.location.href = "login.html";
 };
 
+
+
 const productContainer = document.getElementById("productContainer");
 const searchInput = document.getElementById("searchInput");
 const categorySelect = document.getElementById("categorySelect");
 const sortSelect = document.getElementById("sortSelect");
+const scrollBtn = document.getElementById("scrollTopBtn");
 
-/* ------------------ MANUAL CATEGORIES ------------------ */
+
+/* ------------------ CATEGORIES ------------------ */
+
 const categories = [
 "Fashion & Apparel",
 "Electronics",
@@ -149,11 +154,37 @@ let allProducts = JSON.parse(localStorage.getItem("products")) ||  [
 { id: 100, title: "Bike Chain Lubricant", price: 220, category: "Automobile Accessories", image: "../Assets/Automobile Accessories/Auto10.jpg"},
 
 ];
-
 localStorage.setItem("products", JSON.stringify(allProducts));
 
+function saveFilters(){
+
+const filters = {
+search: searchInput.value,
+category: categorySelect.value,
+sort: sortSelect.value
+};
+
+localStorage.setItem("filters", JSON.stringify(filters));
+
+}
+
+
+function loadFilters(){
+
+const filters = JSON.parse(localStorage.getItem("filters"));
+
+if(!filters) return;
+
+searchInput.value = filters.search || "";
+categorySelect.value = filters.category || "";
+sortSelect.value = filters.sort || "";
+
+}
+
 function populateCategories(){
+
 categorySelect.innerHTML="";
+
 const option=document.createElement("option");
 option.value="";
 option.textContent="All Categories";
@@ -166,30 +197,41 @@ opt.value=cat;
 opt.textContent=cat;
 categorySelect.appendChild(opt);
 });
+
 }
 
 function renderProducts(products){
+
 productContainer.innerHTML="";
+
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
 const wishlist=JSON.parse(localStorage.getItem("wishlist"))||[];
+
 products.forEach(product=>{
+
 const cartItem=cart.find(item=>item.id===product.id);
 const quantity=cartItem?cartItem.quantity:0;
 
 const isWishlisted=wishlist.includes(product.id);
+
 const card=document.createElement("div");
 card.classList.add("product-card");
+
 card.innerHTML=`
 
 <a href="product.html?id=${product.id}">
 <img src="${product.image}" alt="${product.title}">
 </a>
+
 <h4>${product.title}</h4>
+
 <div class="price-wishlist">
 <p>₹${product.price}</p>
+
 <span class="wishlist-icon" onclick="toggleWishlist(${product.id})">
 ${isWishlisted ? "❤️" : "🤍"}
 </span>
+
 </div>
 
 <div class="rating" id="rating-${product.id}">
@@ -242,7 +284,10 @@ filtered.sort((a,b)=>a.price-b.price);
 if(sortSelect.value==="high"){
 filtered.sort((a,b)=>b.price-a.price);
 }
+
 renderProducts(filtered);
+saveFilters();
+
 }
 
 window.changeQuantity=function(id,change){
@@ -253,25 +298,31 @@ if(existing){
 existing.quantity+=change;
 if(existing.quantity<=0){
 cart=cart.filter(item=>item.id!==id);
-}}
-
+}
+}
 else if(change>0){
 cart.push({...product,quantity:1});
+
 }
 
 localStorage.setItem("cart",JSON.stringify(cart));
+
 applyFilters();
 updateCartCount();
+
 };
 
 function updateCartCount(){
+
 const cart=JSON.parse(localStorage.getItem("cart"))||[];
 const total=cart.reduce((sum,item)=>sum+item.quantity,0);
 document.getElementById("cartCount").textContent=total;
 }
 
 window.toggleWishlist=function(id){
+
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
 if(wishlist.includes(id)){
 wishlist = wishlist.filter(item => item !== id);
 }
@@ -303,12 +354,29 @@ star.style.color="gold";
 star.style.color="gray";
 }
 });
-});}
+});
+}
 
 searchInput.addEventListener("input",applyFilters);
 categorySelect.addEventListener("change",applyFilters);
 sortSelect.addEventListener("change",applyFilters);
 
+window.onscroll = function () {
+if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+scrollBtn.style.display = "block";
+} 
+else {
+scrollBtn.style.display = "none";
+}
+};
+scrollBtn.addEventListener("click",function(){
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+});
+
 populateCategories();
-renderProducts(allProducts);
+loadFilters();
+applyFilters();
 updateCartCount();

@@ -4,15 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dynamic Shopping Website</title>
+
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="stylesheet" href="../Css/web.css">
+
 </head>
 
 <body>
+
 <nav class="navbar">
 <h2 class="logo">Dynamic Shopping Website</h2>
+
 <div class="nav-right">
 <input type="text" id="searchInput" placeholder="Search products...">
+
 <select id="categorySelect"></select>
 
 <select id="sortSelect">
@@ -22,9 +27,12 @@
 </select>
 
 <a href="cart.html">
-Cart (<span id="cartCount">0</span>)</a>
+Cart (<span id="cartCount">0</span>)
+</a>
+
 <a href="wishlist.html">Wishlist ❤️</a>
 <a href="orders.html">My Orders</a>
+
 <button id="logoutBtn" onclick="logout()">Logout</button>
 </div>
 </nav>
@@ -35,6 +43,14 @@ Cart (<span id="cartCount">0</span>)</a>
 
 <button id="scrollTopBtn">↑</button>
 
+<footer id="footer"></footer>
+
 <script src="../JavaScript/main.js"></script>
+
+<script type="module">
+import { footer } from "../Componets/footer.js";
+document.getElementById("footer").innerHTML = footer();
+</script>
+
 </body>
 </html>
