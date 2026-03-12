@@ -1,5 +1,7 @@
-// export const navbar = () =>  {
-//   return`
- 
-//     `;
-// };
+export const navbar = () =>  {
+  return`
+   <>
+   </navbar>
+   </>
+    `;
+};
