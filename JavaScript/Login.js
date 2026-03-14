@@ -1,6 +1,6 @@
 const form = document.getElementById("loginForm");
 
-form.addEventListener("submit", function(e){
+form.addEventListener("submit",(e)=>{
 
 e.preventDefault();
 
@@ -9,17 +9,17 @@ const password = document.getElementById("password").value;
 
 const user = JSON.parse(localStorage.getItem("user"));
 
-if(user && user.email === email && user.password === password){
+if(user && email === user.email && password === user.password){
 
 localStorage.setItem("isLoggedIn", true);
+
 alert("Login Successful");
+
 window.location.href = "index.html";
 
-}else{
-
+}
+else{
 alert("Invalid Email or Password");
-
 }
 
 });
-

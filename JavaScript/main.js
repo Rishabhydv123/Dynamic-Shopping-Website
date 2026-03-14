@@ -5,6 +5,13 @@ alert("Logout Successful");
 window.location.href = "login.html";
 };
 
+const user = JSON.parse(localStorage.getItem("user"));
+if(user){
+const usernameElement = document.getElementById("username");
+if(usernameElement){
+usernameElement.textContent = "Hello, " + user.name;
+};
+};
 
 
 const productContainer = document.getElementById("productContainer");
@@ -380,3 +387,4 @@ populateCategories();
 loadFilters();
 applyFilters();
 updateCartCount();
+
