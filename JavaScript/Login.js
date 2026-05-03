@@ -15,7 +15,7 @@ localStorage.setItem("isLoggedIn", true);
 
 alert("Login Successful");
 
-window.location.href = "index.html";
+window.location.href = "../index.html";
 
 }
 else{

@@ -18,6 +18,6 @@ localStorage.setItem("user", JSON.stringify(user));
 
 alert("Signup Successful");
 
-window.location.href = "login.html";
+window.location.href = "../Pages/Login.html";
 
 });

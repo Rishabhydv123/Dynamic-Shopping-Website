@@ -73,6 +73,6 @@ localStorage.setItem("orders", JSON.stringify(orders));
 localStorage.removeItem("cart");
 alert("Order Placed Successfully 🎉");
 
-window.location.href = "index.html";
+window.location.href = "../index.html";
 
 });
